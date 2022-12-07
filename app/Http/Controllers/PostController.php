@@ -49,11 +49,11 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     // public function show(Post $post)
-    public function show($slug)
+    public function show(Post $post)
     {
         return view('post', [
             'title' => 'Single Posts',
-            'post' => Post::find($slug)
+            'post' => $post
         ]);
     }
 
