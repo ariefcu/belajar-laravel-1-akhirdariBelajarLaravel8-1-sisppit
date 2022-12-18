@@ -5,6 +5,7 @@
 <div class="container">
     <div class="row my-3">
         <div class="col-lg-8">
+            
             <h1 class="mb-3">{{ $post->title }} </h1>    
 
             <a href="/dashboard/posts" class="btn btn-success"><span data-feather="home"></span> Back to all my Posts</a>
@@ -17,7 +18,6 @@
                 {!! $post->body !!}
             </article>
         
-            <a href="/posts" class="d-block mt-3 text-decoration-none">Back to Blog</a>
         </div>
     </div>
 </div>
