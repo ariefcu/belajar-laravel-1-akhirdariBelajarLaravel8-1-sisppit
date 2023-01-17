@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->boolean('is_admin')->default(false);
-        });
+        // tidak jadi dimasukkan sebagai tambahan, karena sudah dimasukkan ke create_users
+        // Schema::table('users', function (Blueprint $table) {
+        //     $table->boolean('is_admin')->default(false);
+        // });
     }
 
     /**
@@ -25,8 +26,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColomn('is_admin');
-        });
+        // tidak jadi dimasukkan sebagai tambahan, karena sudah dimasukkan ke create_users
+        // Schema::table('users', function (Blueprint $table) {
+        //     $table->dropColomn('is_admin');
+        // });
     }
 };

@@ -9,6 +9,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardPostController;
 use App\Http\Controllers\AdminCategoryController;
+use App\Http\Controllers\SantriController;
 
 
 /*
@@ -24,8 +25,8 @@ use App\Http\Controllers\AdminCategoryController;
 
 Route::get('/', function () {
     return view('home', [
-        'title' => 'Home',
-        'active' => 'posts'
+        'title' => 'Pondok Pesantren Ibnu Taimiyah, Bogor',
+        'active' => 'posts',
     ]);
 });
 
@@ -33,9 +34,9 @@ Route::get('/about', function () {
     return view('about', [
         'title' => 'About',
         'active' => 'about',
-        'name' => 'Arief Cahyo Utomo',
-        'email' => 'ariefcu@gmail.com',
-        'image' => 'img/PIT.png'
+        'name' => 'Kunjungi website :',
+        'email' => 'https://ibnutaimiyah.sch.id/',
+        'image' => 'img/PIT.png',
     ]);
 });
 
@@ -65,3 +66,27 @@ Route::get('dashboard/posts/checkSlug', [DashboardPostController::class, 'checkS
 Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
 
 Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show')->middleware('admin');
+
+// Route::get('/dashboard/rekapsantri', function () {
+//     return view('dashboard.santris.rekapsantri.index', [
+//         // 'title' => 'Pondok Pesantren Ibnu Taimiyah, Bogor',
+//         // 'active' => 'posts',
+//     ]);
+// });
+
+// Route::resource('/dashboard/santris', SantriController::class)->middleware('admin');
+Route::get('/dashboard/rekapsantri', [SantriController::class, 'rekapsantri']);
+Route::get('/dashboard/santrima', [SantriController::class, 'santrima']);
+Route::get('/dashboard/santrimts', [SantriController::class, 'santrimts']);
+Route::get('/dashboard/santrimi', [SantriController::class, 'santrimi']);
+Route::get('/dashboard/santrira', [SantriController::class, 'santrira']);
+Route::get('/dashboard/santriyatim', [SantriController::class, 'santriyatim']);
+Route::get('/dashboard/santriasrama', [SantriController::class, 'santriasrama']);
+Route::get('/dashboard/santriagk', [SantriController::class, 'santriagk']);
+Route::get('/dashboard/santris', [SantriController::class, 'index']);
+// Route::get('/santris/create', [SantriController::class, 'create']);
+// Route::post('/santris', [SantriController::class, 'store']);
+// Route::get('/santris/{santri}', [SantriController::class, 'show']);
+// Route::get('/santris/{santri}/edit', [SantriController::class, 'edit']);
+// Route::put('/santris/{santri}', [SantriController::class, 'update']);
+// Route::delete('/santris/{santri}', [SantriController::class, 'destroy']);

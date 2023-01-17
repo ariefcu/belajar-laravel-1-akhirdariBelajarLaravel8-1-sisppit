@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-light">
     <div class="container">
-      <a class="navbar-brand" href="/">Belajar Laravel</a>
+      <a class="navbar-brand" href="/">Sistem Informasi Santri PPIT</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -13,10 +13,10 @@
             <a class="nav-link {{ ($active === "about") ? 'active' : '' }}" href="/about">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ ($active === "post") ? 'active' : '' }}" href="/posts">Blog</a>
+            <a class="nav-link {{ ($active === "post") ? 'active' : '' }}" href="/posts">Berita Santri</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ ($active === "categories") ? 'active' : '' }}" href="/categories">Categories</a>
+            <a class="nav-link {{ ($active === "categories") ? 'active' : '' }}" href="/categories">Kategori Berita</a>
           </li>
         </ul>
         

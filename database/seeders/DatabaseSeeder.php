@@ -4,10 +4,15 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Santri;
 use App\Models\User;
-use App\Models\Category;
 use App\Models\Post;
+use App\Models\Category;
+
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,86 +24,47 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
-        User::create([
-            'name' => 'Arief Cahyo Utomo',
-            'username' => 'ariefcu',
-            'email' => 'ariefcu@gmail.com',
-            'password' => bcrypt('bismillah')
+        $this->call([ 
+            // SantriSeeder::class,
+            UserSeeder::class,
+            // PostSeeder::class,
+            CategorySeeder::class
         ]);
-        
-        // User::create([
-        //     'name' => 'Harits Bin Arief',
-        //     'email' => 'harits@gmail.com',
-        //     'password' => bcrypt('12345')
-        // ]);
+    
+        // Santri::factory(3)->create();
+        User::factory(1)->create();
+        Post::factory(3)->create();
+        // Category::factory(3)->create();
 
-        User::factory(3)->create();
+        // using Magic Method for Has Many Relationships
+        User::factory()
+        ->count(1)
+        ->hasPosts(2)
+        ->create();
 
-        Category::create([
-            'name' => 'Web Programming',
-            'slug' => 'web-programming'
-        ]);
+        // using Magic Method for Has Many Relationships
+        // $user = User::factory(2)
+        //     ->hasPosts(3, [
+        //     'is_admin' => false,
+        // ])
+        // ->create();
 
-        Category::create([
-            'name' => 'Web Design',
-            'slug' => 'web-design'
-        ]);
+        // using Magic Method for Belongs To Relationships
+        // $posts = Post::factory()
+        // ->count(3)
+        // ->forUser([
+        //         'name' => 'Jessica Archer',
+        // ])
+        // ->create();
 
-        Category::create([
-            'name' => 'Personal',
-            'slug' => 'personal'
-        ]);
-
-        Post::factory(20)->create();
-
-        // Post::create([
-        //     'title' => 'Judul Pertama',
-        //     'slug' => 'judul-pertama',
-        //     'excerpt' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias a non, placeat atque error magni cumque illo delectus? Quod, enim.',
-        //     'body' => '<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis quaerat id distinctio amet laboriosam autem nisi quasi! </p><p>Quos voluptas saepe excepturi pariatur provident illum fugiat laudantium, incidunt magni rem ab esse cupiditate consequatur omnis natus vitae expedita dicta eligendi quae porro voluptatibus doloribus. Ex nihil animi ea error? </p><p>A modi aperiam quod velit numquam, voluptate illum facilis natus eos nisi officiis laboriosam nemo eius cum molestias animi esse accusantium nobis, quasi sequi. A dolorem laudantium voluptates adipisci recusandae excepturi dignissimos magni doloribus sunt, modi facere cum exercitationem ipsum dolorum enim vel accusamus voluptas quidem reiciendis. </p><p>Magni voluptates blanditiis laboriosam reprehenderit tempora eligendi tenetur dolorem, veritatis minima aut, consequuntur in maxime ipsam eos illo architecto reiciendis excepturi deserunt ad repellendus necessitatibus omnis quasi! Sed ad, rerum sint debitis soluta et deleniti hic quia dolorem suscipit vero excepturi architecto reprehenderit accusantium doloribus corrupti fuga iure. In corrupti, exercitationem ad quidem sint illo. </p>',
-        //     'category_id' => 1,
-        //     'user_id' => 1
-        // ]);
-        
-        // Post::create([
-        //     'title' => 'Judul Kedua',
-        //     'slug' => 'judul-kedua',
-        //     'excerpt' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias a non, placeat atque error magni cumque illo delectus? Quod, enim.',
-        //     'body' => '<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis quaerat id distinctio amet laboriosam autem nisi quasi! </p><p>Quos voluptas saepe excepturi pariatur provident illum fugiat laudantium, incidunt magni rem ab esse cupiditate consequatur omnis natus vitae expedita dicta eligendi quae porro voluptatibus doloribus. Ex nihil animi ea error? </p><p>A modi aperiam quod velit numquam, voluptate illum facilis natus eos nisi officiis laboriosam nemo eius cum molestias animi esse accusantium nobis, quasi sequi. A dolorem laudantium voluptates adipisci recusandae excepturi dignissimos magni doloribus sunt, modi facere cum exercitationem ipsum dolorum enim vel accusamus voluptas quidem reiciendis. </p><p>Magni voluptates blanditiis laboriosam reprehenderit tempora eligendi tenetur dolorem, veritatis minima aut, consequuntur in maxime ipsam eos illo architecto reiciendis excepturi deserunt ad repellendus necessitatibus omnis quasi! Sed ad, rerum sint debitis soluta et deleniti hic quia dolorem suscipit vero excepturi architecto reprehenderit accusantium doloribus corrupti fuga iure. In corrupti, exercitationem ad quidem sint illo. </p>',
-        //     'category_id' => 2,
-        //     'user_id' => 2
-        // ]);
-
-        // Post::create([
-        //     'title' => 'Judul Ketiga',
-        //     'slug' => 'judul-ketiga',
-        //     'excerpt' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias a non, placeat atque error magni cumque illo delectus? Quod, enim.',
-        //     'body' => '<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis quaerat id distinctio amet laboriosam autem nisi quasi! </p><p>Quos voluptas saepe excepturi pariatur provident illum fugiat laudantium, incidunt magni rem ab esse cupiditate consequatur omnis natus vitae expedita dicta eligendi quae porro voluptatibus doloribus. Ex nihil animi ea error? </p><p>A modi aperiam quod velit numquam, voluptate illum facilis natus eos nisi officiis laboriosam nemo eius cum molestias animi esse accusantium nobis, quasi sequi. A dolorem laudantium voluptates adipisci recusandae excepturi dignissimos magni doloribus sunt, modi facere cum exercitationem ipsum dolorum enim vel accusamus voluptas quidem reiciendis. </p><p>Magni voluptates blanditiis laboriosam reprehenderit tempora eligendi tenetur dolorem, veritatis minima aut, consequuntur in maxime ipsam eos illo architecto reiciendis excepturi deserunt ad repellendus necessitatibus omnis quasi! Sed ad, rerum sint debitis soluta et deleniti hic quia dolorem suscipit vero excepturi architecto reprehenderit accusantium doloribus corrupti fuga iure. In corrupti, exercitationem ad quidem sint illo. </p>',
-        //     'category_id' => 1,
-        //     'user_id' => 1
-        // ]);
-
-        // Post::create([
-        //     'title' => 'Judul Keempat',
-        //     'slug' => 'judul-Empat',
-        //     'excerpt' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias a non, placeat atque error magni cumque illo delectus? Quod, enim.',
-        //     'body' => '<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis quaerat id distinctio amet laboriosam autem nisi quasi! </p><p>Quos voluptas saepe excepturi pariatur provident illum fugiat laudantium, incidunt magni rem ab esse cupiditate consequatur omnis natus vitae expedita dicta eligendi quae porro voluptatibus doloribus. Ex nihil animi ea error? </p><p>A modi aperiam quod velit numquam, voluptate illum facilis natus eos nisi officiis laboriosam nemo eius cum molestias animi esse accusantium nobis, quasi sequi. A dolorem laudantium voluptates adipisci recusandae excepturi dignissimos magni doloribus sunt, modi facere cum exercitationem ipsum dolorum enim vel accusamus voluptas quidem reiciendis. </p><p>Magni voluptates blanditiis laboriosam reprehenderit tempora eligendi tenetur dolorem, veritatis minima aut, consequuntur in maxime ipsam eos illo architecto reiciendis excepturi deserunt ad repellendus necessitatibus omnis quasi! Sed ad, rerum sint debitis soluta et deleniti hic quia dolorem suscipit vero excepturi architecto reprehenderit accusantium doloribus corrupti fuga iure. In corrupti, exercitationem ad quidem sint illo. </p>',
-        //     'category_id' => 2,
-        //     'user_id' => 2
-        // ]);
-
-        // Post::create([
-        //     'title' => 'Judul Kelima',
-        //     'slug' => 'judul-kelima',
-        //     'excerpt' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias a non, placeat atque error magni cumque illo delectus? Quod, enim.',
-        //     'body' => '<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis quaerat id distinctio amet laboriosam autem nisi quasi! </p><p>Quos voluptas saepe excepturi pariatur provident illum fugiat laudantium, incidunt magni rem ab esse cupiditate consequatur omnis natus vitae expedita dicta eligendi quae porro voluptatibus doloribus. Ex nihil animi ea error? </p><p>A modi aperiam quod velit numquam, voluptate illum facilis natus eos nisi officiis laboriosam nemo eius cum molestias animi esse accusantium nobis, quasi sequi. A dolorem laudantium voluptates adipisci recusandae excepturi dignissimos magni doloribus sunt, modi facere cum exercitationem ipsum dolorum enim vel accusamus voluptas quidem reiciendis. </p><p>Magni voluptates blanditiis laboriosam reprehenderit tempora eligendi tenetur dolorem, veritatis minima aut, consequuntur in maxime ipsam eos illo architecto reiciendis excepturi deserunt ad repellendus necessitatibus omnis quasi! Sed ad, rerum sint debitis soluta et deleniti hic quia dolorem suscipit vero excepturi architecto reprehenderit accusantium doloribus corrupti fuga iure. In corrupti, exercitationem ad quidem sint illo. </p>',
-        //     'category_id' => 1,
-        //     'user_id' => 1
+        // DB::table('users')->insert([
+        //     'name' => Str::random(10),
+        //     'username' => Str::random(10),
+        //     'email' => Str::random(10).'@gmail.com',
+        //     'password' => Hash::make('password'),
+        //     'email_verified_at' => now(),
+        //     'is_admin' => false,
+        //     'remember_token' => Str::random(10),
         // ]);
 
     }
