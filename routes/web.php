@@ -10,7 +10,8 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardPostController;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\SantriController;
-
+use GuzzleHttp\Middleware;
+use Illuminate\Routing\Controllers\Middleware as ControllersMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,15 +76,15 @@ Route::resource('/dashboard/categories', AdminCategoryController::class)->except
 // });
 
 // Route::resource('/dashboard/santris', SantriController::class)->middleware('admin');
-Route::get('/dashboard/rekapsantri', [SantriController::class, 'rekapsantri']);
-Route::get('/dashboard/santrima', [SantriController::class, 'santrima']);
-Route::get('/dashboard/santrimts', [SantriController::class, 'santrimts']);
-Route::get('/dashboard/santrimi', [SantriController::class, 'santrimi']);
-Route::get('/dashboard/santrira', [SantriController::class, 'santrira']);
-Route::get('/dashboard/santriyatim', [SantriController::class, 'santriyatim']);
-Route::get('/dashboard/santriasrama', [SantriController::class, 'santriasrama']);
-Route::get('/dashboard/santriagk', [SantriController::class, 'santriagk']);
-Route::get('/dashboard/santris', [SantriController::class, 'index']);
+Route::get('/dashboard/rekapsantri', [SantriController::class, 'rekapsantri'])->Middleware('auth');
+Route::get('/dashboard/santrima', [SantriController::class, 'santrima'])->Middleware('auth');
+Route::get('/dashboard/santrimts', [SantriController::class, 'santrimts'])->middleware('auth');
+Route::get('/dashboard/santrimi', [SantriController::class, 'santrimi'])->middleware('auth');
+Route::get('/dashboard/santrira', [SantriController::class, 'santrira'])->middleware('auth');
+Route::get('/dashboard/santriyatim', [SantriController::class, 'santriyatim'])->middleware('auth');
+Route::get('/dashboard/santriasrama', [SantriController::class, 'santriasrama'])->middleware('auth');
+Route::get('/dashboard/santriagk', [SantriController::class, 'santriagk'])->middleware('auth');
+Route::get('/dashboard/santris', [SantriController::class, 'index'])->middleware('auth');
 // Route::get('/santris/create', [SantriController::class, 'create']);
 // Route::post('/santris', [SantriController::class, 'store']);
 // Route::get('/santris/{santri}', [SantriController::class, 'show']);

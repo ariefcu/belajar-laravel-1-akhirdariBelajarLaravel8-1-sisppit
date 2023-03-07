@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('santris', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('nisl');
+            $table->bigInteger('nisl')->unique();
             $table->bigInteger('nisn');
             $table->bigInteger('nik');
             $table->string('name');
